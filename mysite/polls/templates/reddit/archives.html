@@ -58,6 +58,7 @@
 </div>
 <div class="row justify-content-center align-self-center">
   {% load twitter_tags %}
+   <ul class = 'list-group' style="width: 32%; min-width: 22rem; float: left; margin: auto">
         {% for tweet in tweets %}
         <div class="twitlist list row justify-content-center align-self-center {{tweet.user.sub_name}}" value="{{tweet.user.sub_name}}">
       <div class="card" style="width: 20rem; background-color: #e6ffff; opacity: 0.85">
@@ -71,6 +72,7 @@
       </div>
         </div>
         {% endfor %}
+  </ul>
 <script>
 
 var list = document.getElementsByClassName("list");
