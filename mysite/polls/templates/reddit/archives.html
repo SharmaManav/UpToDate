@@ -159,10 +159,8 @@ lister.addEventListener("change", function() {
 
 //Toggles which containers to view on page based on search value
 function listing(value) {
-	console.log("trigger")
 	list1 = document.getElementsByClassName(value);
 	list2 = document.getElementsByClassName("list");
-  console.log(list2);
   //hides everything
 	for(i = 0; i < list2.length; i++) {
 		list2[i].hidden = true;
@@ -172,9 +170,6 @@ function listing(value) {
   y_list = document.getElementsByClassName("ytlist");
   t_list = document.getElementsByClassName("twitlist");
 
-console.log(r_list);
-console.log(y_list);
-console.log(t_list);
   //then displays elements based on value
   if(reddit_check.checked) {
     for(i = 0; i < r_list.length; i++) {
