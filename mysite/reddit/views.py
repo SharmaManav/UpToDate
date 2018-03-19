@@ -87,7 +87,48 @@ def archives(request):
         youtube_list.add(sub2_name)
     ys = Youtube_Post.objects.order_by('-id')
 
-    return render(request, 'reddit/archives.html', {'set': subname_list, 'reddit': qs, 'youtube_set': youtube_list, 'youtube': ys})
+    tw = Twitter_Post.objects.order_by('-id')[:15]
+
+    tw_list = []
+
+    for elem in tw:
+        tw_status = twitter.models.Status()
+        tw_status.user = twitter.models.User()
+        tw_status.urls = []
+        tw_status.hashtags = []
+        tw_status.user_mentions = []
+
+        url_list = elem.urls.split()
+        for (e_url, url) in zip(url_list[0::2], url_list[1::2]):
+#             print("url: ", e_url, " | ", url)
+            newUrl = twitter.models.Url()
+            newUrl.expanded_url = e_url
+            newUrl.url = url
+            tw_status.urls.append(newUrl)
+
+
+        for hash in elem.hash.split():
+#             print(" >> ", hash)
+            newHash = twitter.models.Hashtag()
+            newHash.text = hash
+            tw_status.hashtags.append(newHash)
+
+
+        for mention in elem.mentions.split():
+            newMention = twitter.models.User()
+            newMention.screen_name = mention
+            tw_status.user_mentions.append(newMention)
+
+
+        tw_status.text = elem.message
+        tw_status.user.name = elem.username
+        tw_status.user.screen_name = elem.handle
+        tw_status.created_at = elem.pub_date
+        tw_status.user.profile_image_url = elem.icon
+        tw_status.user.sub_name = elem.searchQuery
+        tw_list.append(tw_status)
+
+    return render(request, 'reddit/archives.html', {'set': subname_list, 'reddit': qs, 'youtube_set': youtube_list, 'youtube': ys, 'tweets': tw_list})
 
 def search(request):
 
