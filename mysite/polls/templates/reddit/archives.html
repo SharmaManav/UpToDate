@@ -26,9 +26,30 @@
             </div>
        </div>
 	</div>
-
 {% endfor %}
 </div>
+<select id="selector2">
+    {% for s in youtube_set %}
+    <option value = "{{s}}" selected>{{s}}</option>
+    {% endfor %}
+</select>
+<div class="row justify-content-center align-self-center">
+ {% for post in youtube %}
+         <div class="ytlist row justify-content-center align-self-center">
+      <div class="card" style="width: 20rem; background-color: #ffe6e6; opacity: 0.85">
+        <div class="card-body">
+          <h4 class="card-title"></h4>
+          <p class="card-text"></p>
+          <iframe width="265" height="175" src="http://www.youtube.com/embed/{{post.ytid}}" frameborder="0" allowfullscreen></iframe>
+          <div style="float: right"><i>Save:</i> <input type="checkbox" class="fav youtube" id="{{post.id}}"></div>
+        </div>
+      </div>
+          </div>
+ {% endfor %}
+</div>
+
+
+
 <script>
 var list = document.getElementsByClassName("list");
 for(i = 0; i < list.length; i++) {

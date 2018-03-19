@@ -81,7 +81,13 @@ def archives(request):
         subname_list.add(sub_name)
     qs = Reddit_Post.objects.order_by('-pub_date')
 
-    return render(request, 'reddit/archives.html', {'set': subname_list, 'reddit': qs})
+    youtube_list = set()
+    for sub2 in Youtube_Post.objects.all():
+        sub2_name = sub2.searchQuery
+        youtube_list.add(sub2_name)
+    ys = Youtube_Post.objects.order_by('-id')
+
+    return render(request, 'reddit/archives.html', {'set': subname_list, 'reddit': qs, 'youtube_set': youtube_list, 'youtube': ys})
 
 def search(request):
 
