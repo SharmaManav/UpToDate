@@ -166,12 +166,29 @@ function listing(value) {
 		list2[i].hidden = true;
 	}
 
+  r_list = document.getElementsByClassName("reddit");
+  y_list = document.getElementsByClassName("ytlist");
+  t_list = document.getElementsByClassName("twitlist");
 
+console.log(r_list);
+console.log(y_list);
+console.log(t_list);
   //then displays elements based on value
-	for(i = 0; i < list1.length; i++) {
-    list1[i].hidden = false;
-	}
-
+  if(reddit_check.checked) {
+    for(i = 0; i < r_list.length; i++) {
+      if(r_list[i].classList.contains(value)) r_list[i].hidden=false;
+    }
+  }
+  if(youtube_check.checked) {
+    for(i = 0; i < y_list.length; i++) {
+      if(y_list[i].classList.contains(value)) y_list[i].hidden=false;
+    }
+  }
+  if(twitter_check.checked) {
+    for(i = 0; i < t_list.length; i++) {
+      if(t_list[i].classList.contains(value)) t_list[i].hidden=false;
+    }
+  }
 }
 
 
